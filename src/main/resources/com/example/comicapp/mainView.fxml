@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" style="-fx-background-color: #0A0F28;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comicapp.MainController">
+
+    <!-- CENTER: contenido dinámico -->
+    <center>
+        <StackPane fx:id="contentContainer" />
+    </center>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <left>
+      <VBox fx:id="menuContainer" prefHeight="335.0" prefWidth="35.0" BorderPane.alignment="CENTER" />
+   </left>
+   <top>
+      <StackPane alignment="TOP_LEFT" style="-fx-background-color: #0A0A1A;" stylesheets="@nightwing.css" BorderPane.alignment="TOP_LEFT">
+         <children>
+            <ImageView fx:id="iconMenu" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/menu.png" />
+               </image>
+            </ImageView>
+         </children>
+      </StackPane>
+   </top>
+
+</BorderPane>

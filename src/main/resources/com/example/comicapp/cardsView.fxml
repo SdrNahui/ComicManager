@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane style="-fx-background-color: #0D2A63; -fx-background-radius: 10;"
+            styleClass="card"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.comicapp.CardController">
+
+    <children>
+        <VBox spacing="5">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+
+            <!-- imagen del cómic -->
+            <AnchorPane style="-fx-background-color: #222; -fx-background-radius: 8" />
+
+            <Label fx:id="lblTitulo" style="-fx-font-size: 14px;" textFill="white" wrapText="true" />
+            <Label fx:id="lblInfo" style="-fx-font-size: 12px;" textFill="#B0B0B0" />
+        </VBox>
+    </children>
+</AnchorPane>

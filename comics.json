@@ -1,0 +1,92 @@
+[
+  {
+    "titulo": "Nightwing",
+    "numero": 78,
+    "editorial": "DC",
+    "precio": 18000.0,
+    "loTengo": true,
+    "notas": "",
+    "agregado": "2025-12-11"
+  },
+  {
+    "titulo": "Nightwing",
+    "numero": 79,
+    "editorial": "DC",
+    "precio": 18000.0,
+    "loTengo": true,
+    "notas": "",
+    "agregado": "2025-12-11"
+  },
+  {
+    "titulo": "Spider-Man",
+    "numero": 1,
+    "editorial": "MARVEL",
+    "precio": 10800.0,
+    "loTengo": true,
+    "notas": "",
+    "agregado": "2025-12-11"
+  },
+  {
+    "titulo": "Superman",
+    "numero": 2,
+    "editorial": "DC",
+    "precio": 20000.0,
+    "loTengo": true,
+    "notas": "",
+    "agregado": "2025-12-11"
+  },
+  {
+    "titulo": "Spider-gwen",
+    "numero": 1,
+    "editorial": "MARVEL",
+    "precio": 12000.0,
+    "loTengo": false,
+    "notas": "",
+    "agregado": "2025-12-11"
+  },
+  {
+    "titulo": "Batman",
+    "numero": 5,
+    "editorial": "DC",
+    "precio": 20000.0,
+    "loTengo": true,
+    "notas": "buen comic",
+    "agregado": "2025-12-11"
+  },
+  {
+    "titulo": "Silver Eyes",
+    "numero": 1,
+    "editorial": "Roca Editorial",
+    "precio": 30000.0,
+    "loTengo": true,
+    "notas": "",
+    "agregado": "2025-12-11"
+  },
+  {
+    "titulo": "Flash",
+    "numero": 2,
+    "editorial": "DC",
+    "precio": 23000.0,
+    "loTengo": false,
+    "notas": "",
+    "agregado": "2025-12-11"
+  },
+  {
+    "titulo": "Superman",
+    "numero": 16,
+    "editorial": "DC",
+    "precio": 32000.0,
+    "loTengo": true,
+    "notas": "",
+    "agregado": "2025-12-11"
+  },
+  {
+    "titulo": "Ironman",
+    "numero": 1,
+    "editorial": "MARVEL",
+    "precio": 12900.0,
+    "loTengo": true,
+    "notas": "",
+    "agregado": "2025-12-12"
+  }
+]
