@@ -3,6 +3,8 @@ package com.example.comicapp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 
@@ -11,7 +13,8 @@ import java.util.List;
 public class ListaController implements ServiceAware{
     @FXML private FlowPane contenedorCards;
     @FXML private TextField txtBuscar;
-     private ComicService service;
+    private ComicService service;
+    private CardController cardSeleccionada;
 
      public void setService(ComicService service) {
          this.service = service;
@@ -24,22 +27,56 @@ public class ListaController implements ServiceAware{
         txtBuscar.textProperty().addListener((observableValue, old, nuevo) -> buscar());
      //   buscar();
      }
-     private void cargarCards(List<Comic> lista){
-         contenedorCards.getChildren().clear();
-         for (Comic c: lista){
-             System.out.println("Titulo: " + c.getTitulo());
-             try {
-                 FXMLLoader loader = new FXMLLoader(getClass().getResource("cardsView.fxml"));
-                 Parent card = loader.load();
-                 CardController cardController = loader.getController();
-                 cardController.setData(c);
-                 contenedorCards.getChildren().add(card);
-             } catch (Exception e){
-                 e.printStackTrace();
-             }
-         }
-     }
-     private void buscar(){
+
+
+    private void cargarCards(List<Comic> lista) {
+        contenedorCards.getChildren().clear();
+        cardSeleccionada = null;
+
+        for (Comic c : lista) {
+            try {
+                FXMLLoader loader =
+                        new FXMLLoader(getClass().getResource("cardsView.fxml"));
+                Parent card = loader.load();
+                CardController cc = loader.getController();
+
+                cc.setData(
+                        c,
+                        () -> seleccionarCard(cc),
+                        () -> confirmarEliminar(c)
+                );
+
+                contenedorCards.getChildren().add(card);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void seleccionarCard(CardController nueva) {
+        if (cardSeleccionada != null) {
+            cardSeleccionada.deseleccionar();
+        }
+        cardSeleccionada = nueva;
+        cardSeleccionada.seleccionar();
+    }
+
+    private void confirmarEliminar(Comic comic) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Eliminar comic");
+        alert.setHeaderText("¿Eliminar este comic?");
+        alert.setContentText(comic.getTitulo());
+
+        alert.showAndWait().ifPresent(r -> {
+            if (r == ButtonType.OK) {
+                service.eliminarComic(comic);
+                cargarCards(service.getListaComics());
+            }
+        });
+    }
+
+
+    private void buscar(){
          List<Comic> datos;
          if(service == null) return;
          String filtro = txtBuscar.getText().toLowerCase();

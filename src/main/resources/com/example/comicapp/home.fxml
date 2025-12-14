@@ -59,8 +59,8 @@
 
         <Label style="-fx-text-fill: #00AEEF;                       -fx-font-size: 20;                       -fx-font-weight: bold;" text="Últimos Agregados" />
 
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: transparent;                            -fx-padding: 0;">
-            <FlowPane fx:id="contenedorUltimos" hgap="15" style="-fx-padding: 5;                              -fx-background-color: #0D0F12;" vgap="15">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" style="-fx-background: transparent;                            -fx-padding: 0;">
+            <FlowPane fx:id="contenedorUltimos" hgap="15" alignment="CENTER" prefWrapLength="600"  style="-fx-padding: 5;                              -fx-background-color: #0D0F12;" vgap="15">
             </FlowPane>
         </ScrollPane>
     </VBox>

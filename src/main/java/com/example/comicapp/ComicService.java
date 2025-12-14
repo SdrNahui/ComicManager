@@ -1,129 +1,145 @@
 package com.example.comicapp;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class ComicService {
     private ArrayList<Comic> listaComics = new ArrayList<>();
     private final String archivo = "comics.json";
     private Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Comic.class, new ComicAdapter())
             .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
             .setPrettyPrinting()
             .create();
 
-
-    public void agregarComic(Comic comic){
-        if(listaComics.contains(comic)){
+    public void agregarComic(Comic comic) {
+        if (listaComics.contains(comic)) {
             throw new RuntimeException("El comic ya esta añadido");
         }
         listaComics.add(comic);
         guardar();
     }
-    public void editarComic(Comic comic){
 
-    }
-    public void eliminarComic(Comic comic){
+    public void eliminarComic(Comic comic) {
         listaComics.remove(comic);
         guardar();
     }
-    public double calcularGastos(){
+    public void editarComic(Comic comicEditado){
+    //    int index = listaComics.indexOf(comicEditado);
+    //    if(index == -1){
+    //        throw new RuntimeException("El comic no existe");
+    //    }
+    //    listaComics.set(index,comicEditado);
+        guardar();
+    }
+
+    public double calcularGastos() {
         double total = 0;
-        for (Comic c : listaComics){
-            if(c.getLoTengo()){
+        for (Comic c : listaComics) {
+            if (c.getLoTengo()) {
                 total += c.getPrecio();
             }
         }
         return total;
     }
-    public List<Comic> buscarInteligente(String texto){
+
+    public List<Comic> buscarInteligente(String texto) {
         List<Comic> resultado = new ArrayList<>();
-        if (texto == null || texto.isEmpty()){
+        if (texto == null || texto.isBlank()) {
             return resultado;
         }
-        texto = texto.trim();
 
-        //nom + num
+        texto = texto.trim().toLowerCase();
+
+        // ---------- 1. Detectar tipo ----------
+        TipoDeComic tipoBuscado = null;
+        if (texto.contains("tomo")) {
+            tipoBuscado = TipoDeComic.TOMO;
+        } else if (texto.contains("evento")) {
+            tipoBuscado = TipoDeComic.EVENTO;
+        } else if (texto.contains("libro") || texto.contains("one")) {
+            tipoBuscado = TipoDeComic.LIBRO;
+        }
+
+        // ---------- 2. Detectar rango de números ----------
         String[] partes = texto.split(" ");
-        StringBuilder nomDec = new StringBuilder();
-        Integer numDec = null;
+        StringBuilder nombreDetectado = new StringBuilder();
+        Integer numDesde = null;
+        Integer numHasta = null;
 
-        for (String p : partes){
-            try{
-                numDec = Integer.parseInt(p.replace("#",""));
-            } catch (NumberFormatException e){
-                if (!p.equalsIgnoreCase("n") && !p.equalsIgnoreCase("nº")){
-                    nomDec.append(p).append(" ");
+        for (String p : partes) {
+            try {
+                String[] rango = p.replace("#", "").split("-");
+                numDesde = Integer.parseInt(rango[0]);
+                if (rango.length > 1) {
+                    numHasta = Integer.parseInt(rango[1]);
                 }
+            } catch (NumberFormatException e) {
+                nombreDetectado.append(p).append(" ");
             }
         }
 
-        String nomFinal = nomDec.toString().trim().toLowerCase();
+        String nombreFinal = nombreDetectado.toString().trim();
 
-        // Nombre + número
-        if (numDec != null){
-            for (Comic c : listaComics){
-                if (c.getTitulo().toLowerCase().equals(nomFinal) && c.getNumero() == numDec){
-                    resultado.add(c);
-                }
-            }
-            return resultado;
-        }
+        // ---------- 3. Búsqueda por rango (solo tomos) ----------
+        if (numDesde != null) {
+            for (Comic c : listaComics) {
+                if (c instanceof TomoRecopilatorio tomo) {
+                    boolean dentroDelRango =
+                            tomo.getDesde() <= numDesde &&
+                                    (numHasta == null || tomo.getHasta() >= numHasta);
 
-        //Exacta
-        boolean coincide = false;
-        for (Comic c : listaComics){
-            if(c.getTitulo().equalsIgnoreCase(nomFinal)){
-                coincide = true;
-                break;
-            }
-        }
+                    boolean coincideTipo = tipoBuscado == null || c.getTipo() == tipoBuscado;
 
-        if (coincide){
-            for(Comic c : listaComics){
-                if (c.getTitulo().equalsIgnoreCase(nomFinal)){
-                    resultado.add(c);
+                    if (dentroDelRango && coincideTipo) {
+                        resultado.add(c);
+                    }
                 }
             }
             return resultado;
         }
 
-        //Parcial
-        String t = texto.toLowerCase();
-        for (Comic c : listaComics){
-            if (c.getTitulo().toLowerCase().contains(t) || c.getEditorial().toLowerCase().contains(t)){
+        // ---------- 4. Búsqueda exacta por título ----------
+        for (Comic c : listaComics) {
+            if (c.getTitulo().equalsIgnoreCase(nombreFinal)) {
+                if (tipoBuscado == null || c.getTipo() == tipoBuscado) {
+                    resultado.add(c);
+                }
+            }
+        }
+
+        if (!resultado.isEmpty()) {
+            return resultado;
+        }
+
+        // ---------- 5. Búsqueda parcial (título / editorial / tipo) ----------
+        for (Comic c : listaComics) {
+            boolean coincideTexto =
+                    c.getTitulo().toLowerCase().contains(texto) ||
+                            c.getEditorial().toLowerCase().contains(texto);
+
+            boolean coincideTipo = tipoBuscado == null || c.getTipo() == tipoBuscado;
+
+            if (coincideTexto && coincideTipo) {
                 resultado.add(c);
             }
         }
 
         return resultado;
     }
-    public List<Comic> buscarEditorial(String editorial){
-        if(editorial.isEmpty() || editorial == null){
-            return listaComics;
-        }
-        String filtro= editorial.toLowerCase();
-        return listaComics.stream().filter(c -> c.getEditorial().toLowerCase().contains(filtro)).toList();
 
 
-    }
-    public void msgError(String msg){
-        System.out.println(msg);
-    }
-    public ArrayList<Comic> getListaComics() {
+    public List<Comic> getListaComics() {
         return listaComics;
-
     }
+
     public int contarEditoriales() {
         return (int) listaComics.stream()
                 .map(Comic::getEditorial)
@@ -131,6 +147,7 @@ public class ComicService {
                 .distinct()
                 .count();
     }
+
     public int getNuevosDelMes() {
         YearMonth actual = YearMonth.now();
         return (int) listaComics.stream()
@@ -138,25 +155,12 @@ public class ComicService {
                 .filter(c -> YearMonth.from(c.getAgregado()).equals(actual))
                 .count();
     }
+
     public List<Comic> getUltimos(int cantidad) {
         return listaComics.stream()
                 .sorted(Comparator.comparing(Comic::getAgregado).reversed())
                 .limit(cantidad)
                 .toList();
-    }
-
-
-    public void setListaComics(ArrayList<Comic> listaComics) {
-        this.listaComics = listaComics;
-    }
-
-    //gson
-    private void guardar() {
-        try (FileWriter writer = new FileWriter(archivo)) {
-            gson.toJson(listaComics, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void cargar() {
@@ -165,8 +169,8 @@ public class ComicService {
             ArrayList<Comic> lista = gson.fromJson(reader, tipoLista);
             if (lista != null) {
                 listaComics = lista;
-                for (Comic c : listaComics){
-                    if (c.getAgregado() == null){
+                for (Comic c : listaComics) {
+                    if (c.getAgregado() == null) {
                         c.setAgregado(LocalDate.now());
                     }
                 }
@@ -178,8 +182,11 @@ public class ComicService {
         }
     }
 
-
-
-
-
+    private void guardar() {
+        try (FileWriter writer = new FileWriter(archivo)) {
+            gson.toJson(listaComics, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

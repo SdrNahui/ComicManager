@@ -44,3 +44,13 @@
     -fx-text-fill: #9ec5ff;
     -fx-font-size: 12px;
 }
+.text-area {
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #3d5a80;
+}
+
+.text-area .content {
+    -fx-background-color: #1a1c20;
+    -fx-text-fill: white;
+}
+

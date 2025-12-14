@@ -1,37 +1,43 @@
 package com.example.comicapp;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Comic {
+public abstract class Comic {
     private String titulo;
-    private int numero;
+    //    private int numero;
     private String editorial;
     private double precio;
     private boolean loTengo;
     private String notas;
     private LocalDate agregado;
-    public Comic (String titulo, int numero, String editorial, double precio, boolean loTengo, String notas){
-        if ((titulo == null) || titulo.isEmpty()){
+    protected TipoDeComic tipo;
+
+    public Comic(String titulo, String editorial, double precio, boolean loTengo, String notas) {
+        if ((titulo == null) || titulo.isEmpty()) {
             throw new RuntimeException("nombre invalido");
         }
         this.titulo = titulo;
-        if ((editorial == null) || editorial.isEmpty()){
+        if ((editorial == null) || editorial.isEmpty()) {
             throw new RuntimeException("Editorial no puede ser vacia");
         }
         this.editorial = editorial;
-        if (numero < 0){
-            throw new RuntimeException("El numero no puede ser menor a 0");
-        }
-        this.numero = numero;
-        if (precio < 0.0){
+        //    if (numero < 0){
+        //        throw new RuntimeException("El numero no puede ser menor a 0");
+        //    }
+        //    this.numero = numero;
+        if (precio < 0.0) {
             throw new RuntimeException("El precio no puede ser menor a 0.0");
         }
         this.precio = precio;
         this.loTengo = loTengo;
         this.notas = notas;
+        this.tipo = tipo;
         this.agregado = LocalDate.now();
     }
-    public String getTitulo(){
+
+    public String getTitulo() {
         return titulo;
     }
 
@@ -39,9 +45,12 @@ public class Comic {
         return editorial;
     }
 
-    public int getNumero() {
-        return numero;
+    public TipoDeComic getTipo() {
+        return tipo;
     }
+    /*    public int getNumero() {
+        return numero;
+    } */
 
     public double getPrecio() {
         return precio;
@@ -62,6 +71,7 @@ public class Comic {
     public void setNotas(String notas) {
         this.notas = notas;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,7 +79,7 @@ public class Comic {
 
         Comic comic = (Comic) o;
 
-        if (numero != comic.numero) return false;
+//        if (numero != comic.numero) return false;
 
         // nombre
         if (titulo == null && comic.titulo != null) return false;
@@ -89,7 +99,7 @@ public class Comic {
         result = 31 * result + (titulo != null ? titulo.toLowerCase().hashCode() : 0);
         result = 31 * result + (editorial != null ? editorial.toLowerCase().hashCode() : 0);
 
-        result = 31 * result + numero;
+//        result = 31 * result + numero;
 
         return result;
     }
@@ -102,4 +112,8 @@ public class Comic {
     public void setAgregado(LocalDate agregado) {
         this.agregado = agregado;
     }
+
+    public abstract String getDescripcion();
 }
+
+

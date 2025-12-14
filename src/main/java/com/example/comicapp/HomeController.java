@@ -12,6 +12,7 @@ public class HomeController implements ServiceAware {
     @FXML private Label lblEditoriales;
     @FXML private Label lblNuevos;
     @FXML private FlowPane contenedorUltimos;
+    private CardController cardSeleccionada;
 
     private ComicService service;
 
@@ -25,24 +26,40 @@ public class HomeController implements ServiceAware {
 
         cargarUltimos();
     }
+
     @FXML public void initialize(){
         System.out.println("HOME CARGADO");
     }
 
     private void cargarUltimos() {
         contenedorUltimos.getChildren().clear();
+        cardSeleccionada = null;
 
         for (Comic c : service.getUltimos(3)) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("cardsView.fxml"));
+                FXMLLoader loader =
+                        new FXMLLoader(getClass().getResource("cardsView.fxml"));
                 Parent card = loader.load();
-                CardController cardController = loader.getController();
-                cardController.setData(c);
+                CardController cc = loader.getController();
+
+                cc.setData(
+                        c,
+                        () -> seleccionarCard(cc),   // click izquierdo
+                        null                          // home NO elimina
+                );
 
                 contenedorUltimos.getChildren().add(card);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void seleccionarCard(CardController nueva) {
+        if (cardSeleccionada != null) {
+            cardSeleccionada.deseleccionar();
+        }
+        cardSeleccionada = nueva;
+        cardSeleccionada.seleccionar();
     }
 }
