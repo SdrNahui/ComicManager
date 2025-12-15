@@ -6,6 +6,7 @@ module com.example.comicapp {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires com.google.gson;
+    requires javafx.graphics;
 
     opens com.example.comicapp to javafx.fxml, com.google.gson;
     exports com.example.comicapp;

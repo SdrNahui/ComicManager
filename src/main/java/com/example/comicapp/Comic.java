@@ -114,6 +114,16 @@ public abstract class Comic {
     }
 
     public abstract String getDescripcion();
+
+    public void setTitulo(String titulo) {
+    }
+
+    public void setEditorial(String editorial) {
+    }
+
+    public void setPrecio(double precio) {
+
+    }
 }
 
 

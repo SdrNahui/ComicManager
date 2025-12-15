@@ -32,4 +32,11 @@ public class TomoRecopilatorio extends Comic{
     public int getHasta() {
         return hasta;
     }
+
+    public void setDesde(int i) {
+    }
+
+    public void setHasta(int i) {
+
+    }
 }

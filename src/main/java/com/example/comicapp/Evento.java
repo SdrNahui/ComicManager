@@ -19,4 +19,7 @@ public class Evento extends Comic {
                 ? "\nIncluye: " + incluye : "");
     }
 
+    public void setIncluye(String text) {
+
+    }
 }

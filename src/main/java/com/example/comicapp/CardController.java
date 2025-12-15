@@ -15,11 +15,12 @@ public class CardController {
 
     private Runnable onSelect;
     private Runnable onEliminar;
+    private Runnable onEditar;
 
-    public void setData(Comic comic, Runnable onSelect, Runnable onEliminar) {
+    public void setData(Comic comic, Runnable onSelect, Runnable onEliminar, Runnable onEditar) {
         this.onSelect = onSelect;
         this.onEliminar = onEliminar;
-
+        this.onEditar = onEditar;
         lblTitulo.setText(comic.getTitulo());
         String estado = comic.getLoTengo() ? " ✔" : " ❌";
         lblInfo.setText(comic.getDescripcion() + estado);
@@ -39,8 +40,12 @@ public class CardController {
         eliminar.setOnAction(e -> {
             if (onEliminar != null) onEliminar.run();
         });
+        MenuItem editar = new MenuItem("Editar");
+        editar.setOnAction(e -> {
+            if(onEditar != null) onEditar.run();
+        });
 
-        menu.getItems().add(eliminar);
+        menu.getItems().addAll(eliminar,editar);
         root.setOnContextMenuRequested(e ->
                 menu.show(root, e.getScreenX(), e.getScreenY())
         );

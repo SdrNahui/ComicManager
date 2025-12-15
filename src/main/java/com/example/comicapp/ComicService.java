@@ -31,14 +31,14 @@ public class ComicService {
         listaComics.remove(comic);
         guardar();
     }
-    public void editarComic(Comic comicEditado){
-    //    int index = listaComics.indexOf(comicEditado);
-    //    if(index == -1){
-    //        throw new RuntimeException("El comic no existe");
-    //    }
-    //    listaComics.set(index,comicEditado);
-        guardar();
+    public void editarComic(Comic original, Comic nuevo) {
+        int idx = listaComics.indexOf(original);
+        if (idx != -1) {
+            listaComics.set(idx, nuevo);
+            guardar();
+        }
     }
+
 
     public double calcularGastos() {
         double total = 0;
@@ -60,17 +60,15 @@ public class ComicService {
 
         // ---------- 1. Detectar tipo ----------
         TipoDeComic tipoBuscado = null;
-        if (texto.contains("tomo")) {
-            tipoBuscado = TipoDeComic.TOMO;
-        } else if (texto.contains("evento")) {
-            tipoBuscado = TipoDeComic.EVENTO;
-        } else if (texto.contains("libro") || texto.contains("one")) {
-            tipoBuscado = TipoDeComic.LIBRO;
+        for (TipoDeComic t : TipoDeComic.values()) {
+            if (t.coincideConTexto(texto)) {
+                tipoBuscado = t;
+                break;
+            }
         }
-
-        // ---------- 2. Detectar rango de números ----------
+        // ---------- 2. Detectar rango ----------
         String[] partes = texto.split(" ");
-        StringBuilder nombreDetectado = new StringBuilder();
+        StringBuilder textoLimpio = new StringBuilder();
         Integer numDesde = null;
         Integer numHasta = null;
 
@@ -82,23 +80,23 @@ public class ComicService {
                     numHasta = Integer.parseInt(rango[1]);
                 }
             } catch (NumberFormatException e) {
-                nombreDetectado.append(p).append(" ");
+                textoLimpio.append(p).append(" ");
             }
         }
 
-        String nombreFinal = nombreDetectado.toString().trim();
+        texto = textoLimpio.toString().trim();
 
-        // ---------- 3. Búsqueda por rango (solo tomos) ----------
+        // ---------- 3. Búsqueda por rango (tomos) ----------
         if (numDesde != null) {
             for (Comic c : listaComics) {
-                if (c instanceof TomoRecopilatorio tomo) {
-                    boolean dentroDelRango =
-                            tomo.getDesde() <= numDesde &&
-                                    (numHasta == null || tomo.getHasta() >= numHasta);
+                if (c instanceof TomoRecopilatorio t) {
+                    boolean rangoOk =
+                            t.getDesde() <= numDesde &&
+                                    (numHasta == null || t.getHasta() >= numHasta);
 
-                    boolean coincideTipo = tipoBuscado == null || c.getTipo() == tipoBuscado;
+                    boolean tipoOk = tipoBuscado == null || c.getTipo() == tipoBuscado;
 
-                    if (dentroDelRango && coincideTipo) {
+                    if (rangoOk && tipoOk) {
                         resultado.add(c);
                     }
                 }
@@ -106,34 +104,30 @@ public class ComicService {
             return resultado;
         }
 
-        // ---------- 4. Búsqueda exacta por título ----------
+        // ---------- 4. Búsqueda textual ----------
         for (Comic c : listaComics) {
-            if (c.getTitulo().equalsIgnoreCase(nombreFinal)) {
-                if (tipoBuscado == null || c.getTipo() == tipoBuscado) {
-                    resultado.add(c);
-                }
-            }
-        }
 
-        if (!resultado.isEmpty()) {
-            return resultado;
-        }
-
-        // ---------- 5. Búsqueda parcial (título / editorial / tipo) ----------
-        for (Comic c : listaComics) {
-            boolean coincideTexto =
-                    c.getTitulo().toLowerCase().contains(texto) ||
+            boolean textoOk =
+                    texto.isEmpty() ||
+                            c.getTitulo().toLowerCase().contains(texto) ||
                             c.getEditorial().toLowerCase().contains(texto);
 
-            boolean coincideTipo = tipoBuscado == null || c.getTipo() == tipoBuscado;
+            // Eventos: buscar también en "incluye"
+            if (!textoOk && c instanceof Evento e) {
+                textoOk = e.getIncluye() != null &&
+                        e.getIncluye().toLowerCase().contains(texto);
+            }
 
-            if (coincideTexto && coincideTipo) {
+            boolean tipoOk = tipoBuscado == null || c.getTipo() == tipoBuscado;
+
+            if (textoOk && tipoOk) {
                 resultado.add(c);
             }
         }
 
         return resultado;
     }
+
 
 
     public List<Comic> getListaComics() {
@@ -182,7 +176,7 @@ public class ComicService {
         }
     }
 
-    private void guardar() {
+    protected void guardar() {
         try (FileWriter writer = new FileWriter(archivo)) {
             gson.toJson(listaComics, writer);
         } catch (IOException e) {

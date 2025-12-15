@@ -45,7 +45,8 @@ public class HomeController implements ServiceAware {
                 cc.setData(
                         c,
                         () -> seleccionarCard(cc),   // click izquierdo
-                        null                          // home NO elimina
+                        null,
+                        null// home NO elimina
                 );
 
                 contenedorUltimos.getChildren().add(card);

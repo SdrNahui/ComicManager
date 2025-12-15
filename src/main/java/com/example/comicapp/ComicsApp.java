@@ -3,6 +3,7 @@ package com.example.comicapp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class ComicsApp extends Application {
 
         MainController controller =fxmlLoader.getController();
         controller.setService(service);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("nightwing-logo.png")));
         stage.setTitle("Comics App");
         stage.setWidth(1100);
         stage.setHeight(700);

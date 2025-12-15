@@ -3,10 +3,14 @@ package com.example.comicapp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -43,7 +47,8 @@ public class ListaController implements ServiceAware{
                 cc.setData(
                         c,
                         () -> seleccionarCard(cc),
-                        () -> confirmarEliminar(c)
+                        () -> confirmarEliminar(c),
+                        () -> abrirEditor(c)
                 );
 
                 contenedorCards.getChildren().add(card);
@@ -73,6 +78,31 @@ public class ListaController implements ServiceAware{
                 cargarCards(service.getListaComics());
             }
         });
+    }
+    private void abrirEditor(Comic comic) {
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(getClass().getResource("agregarView.fxml"));
+            Parent root = loader.load();
+
+            AgregarController ctrl = loader.getController();
+            ctrl.setService(service);
+            ctrl.editarComic(comic);
+
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("nightwing-logo.png")));
+
+            stage.setTitle("Editar comic");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+            // refrescar lista al cerrar
+            cargarCards(service.getListaComics());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
