@@ -124,7 +124,6 @@ public class ComicService {
                 resultado.add(c);
             }
         }
-
         return resultado;
     }
 

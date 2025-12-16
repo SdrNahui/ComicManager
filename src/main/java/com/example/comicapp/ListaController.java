@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ListaController implements ServiceAware{
     @FXML private FlowPane contenedorCards;
     @FXML private TextField txtBuscar;
+    @FXML private Label lblVacio;
     private ComicService service;
     private CardController cardSeleccionada;
 
@@ -106,15 +108,16 @@ public class ListaController implements ServiceAware{
     }
 
 
-    private void buscar(){
-         List<Comic> datos;
-         if(service == null) return;
-         String filtro = txtBuscar.getText().toLowerCase();
-         if (filtro == null || filtro.isEmpty()) {
-             datos = service.getListaComics();
-         } else {
-             datos = service.buscarInteligente(filtro);
-         }
-         cargarCards(datos);
-     }
+    private void buscar() {
+        List<Comic> datos;
+        if (service == null) return;
+        String filtro = txtBuscar.getText().toLowerCase();
+        if (filtro == null || filtro.isEmpty()) {
+            datos = service.getListaComics();
+        } else {
+            datos = service.buscarInteligente(filtro);
+        }
+        cargarCards(datos);
+        lblVacio.setVisible(datos.isEmpty());
+    }
 }
