@@ -19,7 +19,10 @@ public class Evento extends Comic {
                 ? "\nIncluye: " + incluye : "");
     }
 
-    public void setIncluye(String text) {
-
+    public void setIncluye(String incluye) {
+        if(incluye == null || incluye.isBlank()){
+            throw new RuntimeException("incluye invalido");
+        }
+        this.incluye = incluye;
     }
 }

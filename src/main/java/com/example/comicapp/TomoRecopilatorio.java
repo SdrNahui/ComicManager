@@ -33,10 +33,17 @@ public class TomoRecopilatorio extends Comic{
         return hasta;
     }
 
-    public void setDesde(int i) {
+    public void setDesde(int desde) {
+        if(desde < 0){
+            throw  new RuntimeException("Numero invalido");
+        }
+        this.desde = desde;
     }
 
-    public void setHasta(int i) {
-
+    public void setHasta(int hasta) {
+        if(hasta < desde || hasta < 0){
+            throw new RuntimeException("numero invalido");
+        }
+        this.hasta = hasta;
     }
 }

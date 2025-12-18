@@ -18,6 +18,9 @@ public class ComicService {
             .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
             .setPrettyPrinting()
             .create();
+    public ComicService(){
+        System.out.println("Comic Service creado con " + this);
+    }
 
     public void agregarComic(Comic comic) {
         if (listaComics.contains(comic)) {
@@ -178,6 +181,7 @@ public class ComicService {
     protected void guardar() {
         try (FileWriter writer = new FileWriter(archivo)) {
             gson.toJson(listaComics, writer);
+            System.out.println("Se hacen los cambios?" + listaComics);
         } catch (IOException e) {
             e.printStackTrace();
         }

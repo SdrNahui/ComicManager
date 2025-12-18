@@ -116,13 +116,24 @@ public abstract class Comic {
     public abstract String getDescripcion();
 
     public void setTitulo(String titulo) {
+        if(titulo == null || titulo.isBlank()){
+            throw new RuntimeException("Titulo invalido");
+        }
+        this.titulo = titulo;
     }
 
     public void setEditorial(String editorial) {
+        if(editorial == null || editorial.isBlank()){
+            throw new RuntimeException("Editorial invalida");
+        }
+        this.editorial = editorial;
     }
 
     public void setPrecio(double precio) {
-
+        if(precio < 0){
+            throw new RuntimeException("Precio invalido");
+        }
+        this.precio = precio;
     }
 }
 

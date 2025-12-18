@@ -1,91 +1,24 @@
 [
   {
-    "titulo": "Nightwing",
-    "editorial": "DC",
-    "precio": 18000.0,
-    "loTengo": true,
-    "notas": "",
-    "agregado": "2025-12-11"
-  },
-  {
-    "titulo": "Nightwing",
-    "editorial": "DC",
-    "precio": 18000.0,
-    "loTengo": true,
-    "notas": "",
-    "agregado": "2025-12-11"
-  },
-  {
-    "titulo": "Spider-Man",
-    "editorial": "MARVEL",
-    "precio": 10800.0,
-    "loTengo": true,
-    "notas": "",
-    "agregado": "2025-12-11"
-  },
-  {
-    "titulo": "Superman",
-    "editorial": "DC",
-    "precio": 20000.0,
-    "loTengo": true,
-    "notas": "",
-    "agregado": "2025-12-11"
-  },
-  {
-    "titulo": "Spider-gwen",
-    "editorial": "MARVEL",
-    "precio": 12000.0,
-    "loTengo": false,
-    "notas": "",
-    "agregado": "2025-12-11"
-  },
-  {
-    "titulo": "Batman",
-    "editorial": "DC",
-    "precio": 20000.0,
-    "loTengo": true,
-    "notas": "buen comic",
-    "agregado": "2025-12-11"
-  },
-  {
-    "titulo": "Silver Eyes",
-    "editorial": "Roca Editorial",
-    "precio": 30000.0,
-    "loTengo": true,
-    "notas": "",
-    "agregado": "2025-12-11"
-  },
-  {
-    "titulo": "Flash",
-    "editorial": "DC",
-    "precio": 23000.0,
-    "loTengo": false,
-    "notas": "",
-    "agregado": "2025-12-11"
-  },
-  {
-    "titulo": "Superman",
+    "incluye": "Superman 16-27\nSuperwoman Special 1",
+    "titulo": "Superman: El ascenso de Superwoman",
     "editorial": "DC",
     "precio": 32000.0,
     "loTengo": true,
     "notas": "",
-    "agregado": "2025-12-11"
+    "agregado": "2025-12-14",
+    "tipo": "EVENTO"
   },
   {
-    "titulo": "Ironman",
-    "editorial": "MARVEL",
-    "precio": 12900.0,
-    "loTengo": true,
-    "notas": "",
-    "agregado": "2025-12-12"
-  },
-  {
-    "titulo": "Superman",
+    "desde": 78,
+    "hasta": 83,
+    "titulo": "Nightwing: Saltando a la luz",
     "editorial": "DC",
-    "precio": 32000.0,
+    "precio": 18000.0,
     "loTengo": true,
-    "notas": "",
-    "agregado": "2025-12-13"
+    "notas": "\t\t",
+    "agregado": "2025-12-16",
+    "tipo": "TOMO"
   },
   {
     "titulo": "Batman: El mundo",
@@ -93,17 +26,7 @@
     "precio": 25200.0,
     "loTengo": true,
     "notas": "",
-    "agregado": "2025-12-13",
+    "agregado": "2025-12-16",
     "tipo": "LIBRO"
-  },
-  {
-    "incluye": "Superman 16-27\nSuperwoman Special 1",
-    "titulo": "Superman",
-    "editorial": "DC",
-    "precio": 32000.0,
-    "loTengo": true,
-    "notas": "",
-    "agregado": "2025-12-14",
-    "tipo": "EVENTO"
   }
 ]

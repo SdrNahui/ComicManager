@@ -86,11 +86,9 @@ public class ListaController implements ServiceAware{
             FXMLLoader loader =
                     new FXMLLoader(getClass().getResource("agregarView.fxml"));
             Parent root = loader.load();
-
             AgregarController ctrl = loader.getController();
             ctrl.setService(service);
             ctrl.editarComic(comic);
-
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResourceAsStream("nightwing-logo.png")));
 
@@ -98,7 +96,6 @@ public class ListaController implements ServiceAware{
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-
             // refrescar lista al cerrar
             cargarCards(service.getListaComics());
 

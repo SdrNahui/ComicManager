@@ -46,7 +46,7 @@
                 </ImageView>
 
                 <!-- Icon Total -->
-                <ImageView fx:id="iconTotal" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="iconTotal" visible="false" managed="false" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                     <effect>
                         <DropShadow color="#00AEEF" radius="0" spread="0" />
                     </effect>
@@ -86,7 +86,7 @@
                </padding>
                 </Label>
 
-                <Label fx:id="labelTotal" style="-fx-font-weight: bold; -fx-letter-spacing: 2px;" text="TOTAL" textFill="#00AEEF">
+                <Label fx:id="labelTotal" visible="false" managed="false" style="-fx-font-weight: bold; -fx-letter-spacing: 2px;" text="TOTAL" textFill="#00AEEF">
                     <font>
                         <Font name="Segoe UI Semibold" size="18.0" />
                     </font>

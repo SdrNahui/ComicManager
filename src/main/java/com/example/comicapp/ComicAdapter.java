@@ -7,7 +7,7 @@ public class ComicAdapter implements JsonSerializer<Comic>, JsonDeserializer<Com
 
     @Override
     public JsonElement serialize(Comic src, Type typeOfSrc, JsonSerializationContext context) {
-        JsonObject json = context.serialize(src).getAsJsonObject();
+        JsonObject json = context.serialize(src, src.getClass()).getAsJsonObject();
         json.addProperty("tipo", src.getTipo().name());
         return json;
     }

@@ -3,6 +3,7 @@ package com.example.comicapp;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class AgregarController implements ServiceAware{
     @FXML private TextField txtTitulo;
@@ -143,6 +144,8 @@ public class AgregarController implements ServiceAware{
 
                 service.guardar(); // persistir cambios
                 lblMsj.setText("Editado correctamente");
+                Stage stage = (Stage) txtTitulo.getScene().getWindow();
+                stage.close();
             }
 
         } catch (Exception e) {
