@@ -108,7 +108,7 @@ public class ListaController implements ServiceAware{
     private void buscar() {
         List<Comic> datos;
         if (service == null) return;
-        String filtro = txtBuscar.getText().toLowerCase();
+        String filtro = txtBuscar.getText();
         if (filtro == null || filtro.isEmpty()) {
             datos = service.getListaComics();
         } else {
