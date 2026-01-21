@@ -51,7 +51,7 @@ public class CardController {
         );
     }
 
-    // estilos
+    //estilos
     public void seleccionar() {
         root.setStyle("""
             -fx-background-color: #1E90FF;

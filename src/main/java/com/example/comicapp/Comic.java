@@ -23,17 +23,12 @@ public abstract class Comic {
             throw new RuntimeException("Editorial no puede ser vacia");
         }
         this.editorial = editorial;
-        //    if (numero < 0){
-        //        throw new RuntimeException("El numero no puede ser menor a 0");
-        //    }
-        //    this.numero = numero;
         if (precio < 0.0) {
             throw new RuntimeException("El precio no puede ser menor a 0.0");
         }
         this.precio = precio;
         this.loTengo = loTengo;
         this.notas = notas;
-        this.tipo = tipo;
         this.agregado = LocalDate.now();
     }
 
@@ -76,31 +71,21 @@ public abstract class Comic {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Comic comic = (Comic) o;
-
-//        if (numero != comic.numero) return false;
-
         // nombre
         if (titulo == null && comic.titulo != null) return false;
         if (titulo != null && !titulo.equalsIgnoreCase(comic.titulo)) return false;
-
         // editorial
         if (editorial == null && comic.editorial != null) return false;
         if (editorial != null && !editorial.equalsIgnoreCase(comic.editorial)) return false;
-
         return true;
     }
 
     @Override
     public int hashCode() {
         int result = 1;
-
         result = 31 * result + (titulo != null ? titulo.toLowerCase().hashCode() : 0);
         result = 31 * result + (editorial != null ? editorial.toLowerCase().hashCode() : 0);
-
-//        result = 31 * result + numero;
-
         return result;
     }
 
@@ -136,5 +121,3 @@ public abstract class Comic {
         this.precio = precio;
     }
 }
-
-

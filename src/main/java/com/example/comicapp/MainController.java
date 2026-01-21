@@ -10,12 +10,9 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 public class MainController implements ServiceAware {
-    @FXML
-    private ImageView iconMenu;
-    @FXML
-    private VBox menuContainer;
-    @FXML
-    private StackPane contentContainer;
+    @FXML private ImageView iconMenu;
+    @FXML private VBox menuContainer;
+    @FXML private StackPane contentContainer;
     private MenuController menuController;
     private boolean menuVisible = false;
     private ComicService service;
@@ -23,15 +20,12 @@ public class MainController implements ServiceAware {
     public void setService(ComicService service) {
         this.service = service;
         cargarVista("home.fxml");
-
     }
-    @FXML
-    public void initialize() {
+    @FXML public void initialize() {
         cargarMenu();
         menuContainer.setTranslateY(-1000);
         configurarAnimacionesMenu();
     }
-
     public void cargarVista(String nombre) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombre));
@@ -41,16 +35,10 @@ public class MainController implements ServiceAware {
                 ((ServiceAware) controller).setService(service);
             }
             contentContainer.getChildren().setAll(vista);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    public void cerrarMenu() {
-        ocultarMenu();
-    }
-
     private void cargarMenu() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("menuView.fxml"));
@@ -65,12 +53,10 @@ public class MainController implements ServiceAware {
 
     private void mostrarMenu() {
         if (menuVisible) return;
-
         // mostrar textos
         if (menuController != null) {
             menuController.setTextosVisibles(true);
         }
-
         TranslateTransition t = new TranslateTransition(Duration.millis(200), menuContainer);
         t.setToY(0);
         t.play();
@@ -79,12 +65,10 @@ public class MainController implements ServiceAware {
 
     private void ocultarMenu() {
         if (!menuVisible) return;
-
-        // ocultar textos
+        //ocultar textos
         if (menuController != null) {
             menuController.setTextosVisibles(false);
         }
-
         TranslateTransition t = new TranslateTransition(Duration.millis(200), menuContainer);
         t.setToY(-1000);
         t.play();
@@ -96,8 +80,7 @@ public class MainController implements ServiceAware {
             if (menuVisible) ocultarMenu();
             else mostrarMenu();
         });
-
-        // cerrar al hacer click afuera
+        //cerrar
         contentContainer.setOnMouseClicked(e -> {
             if (menuVisible) ocultarMenu();
         });

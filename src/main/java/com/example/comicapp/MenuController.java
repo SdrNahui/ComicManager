@@ -6,8 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 public class MenuController {
-
-    @FXML private VBox menuTextos;
+    @FXML private VBox menuTextos; //no se usa pero cambia los tamaños del layout
     @FXML private Label labelHome;
     @FXML private Label labelAgregar;
     @FXML private Label labelBiblo;
@@ -15,7 +14,7 @@ public class MenuController {
     @FXML private ImageView iconHome;
     @FXML private ImageView iconAgregar;
     @FXML private ImageView iconBiblo;
-    @FXML private ImageView iconTotal;
+    @FXML private ImageView iconTotal; //no se usa pero cambia los tamaños del layout
 
     private MainController main;
 
@@ -25,9 +24,7 @@ public class MenuController {
 
     @FXML
     public void initialize() {
-        // Por defecto el menú está cerrado → ocultamos textos
         setTextosVisibles(false);
-
         iconHome.setOnMouseClicked(e -> main.cargarVista("home.fxml"));
         iconAgregar.setOnMouseClicked(e ->main.cargarVista("agregarView.fxml"));
         iconBiblo.setOnMouseClicked(e -> main.cargarVista("listaView.fxml"));

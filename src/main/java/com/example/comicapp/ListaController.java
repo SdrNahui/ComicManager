@@ -30,29 +30,22 @@ public class ListaController implements ServiceAware{
      }
      @FXML
      public  void initialize(){
-        txtBuscar.textProperty().addListener((observableValue, old, nuevo) -> buscar());
-     //   buscar();
+        txtBuscar.textProperty().addListener((observableValue, old, nuevo)
+                -> buscar());
      }
 
 
     private void cargarCards(List<Comic> lista) {
         contenedorCards.getChildren().clear();
         cardSeleccionada = null;
-
         for (Comic c : lista) {
             try {
                 FXMLLoader loader =
                         new FXMLLoader(getClass().getResource("cardsView.fxml"));
                 Parent card = loader.load();
                 CardController cc = loader.getController();
-
                 cc.setData(
-                        c,
-                        () -> seleccionarCard(cc),
-                        () -> confirmarEliminar(c),
-                        () -> abrirEditor(c)
-                );
-
+                        c, () -> seleccionarCard(cc), () -> confirmarEliminar(c), () -> abrirEditor(c));
                 contenedorCards.getChildren().add(card);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -73,7 +66,6 @@ public class ListaController implements ServiceAware{
         alert.setTitle("Eliminar comic");
         alert.setHeaderText("¿Eliminar este comic?");
         alert.setContentText(comic.getTitulo());
-
         alert.showAndWait().ifPresent(r -> {
             if (r == ButtonType.OK) {
                 service.eliminarComic(comic);
@@ -91,19 +83,15 @@ public class ListaController implements ServiceAware{
             ctrl.editarComic(comic);
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResourceAsStream("nightwing-logo.png")));
-
             stage.setTitle("Editar comic");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-            // refrescar lista al cerrar
             cargarCards(service.getListaComics());
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     private void buscar() {
         List<Comic> datos;

@@ -28,5 +28,16 @@
     "notas": "",
     "agregado": "2025-12-16",
     "tipo": "LIBRO"
+  },
+  {
+    "desde": 6,
+    "hasta": 10,
+    "titulo": "El Asombroso Spider-Man ",
+    "editorial": "Marvel",
+    "precio": 12.9,
+    "loTengo": true,
+    "notas": "",
+    "agregado": "2026-01-20",
+    "tipo": "TOMO"
   }
 ]

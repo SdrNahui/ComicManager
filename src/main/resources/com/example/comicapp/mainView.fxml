@@ -4,9 +4,9 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="root" style="-fx-background-color: #0A0F28;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comicapp.MainController">
-
-    <!-- CENTER: contenido dinámico -->
+<BorderPane style="-fx-background-color: #0A0F28;" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comicapp.MainController">
+    <!--CENTRO-->
     <center>
         <StackPane fx:id="contentContainer" />
     </center>
@@ -17,7 +17,8 @@
       <VBox fx:id="menuContainer" prefHeight="335.0" prefWidth="35.0" BorderPane.alignment="CENTER" />
    </left>
    <top>
-      <StackPane alignment="TOP_LEFT" style="-fx-background-color: #0A0A1A;" stylesheets="@nightwing.css" BorderPane.alignment="TOP_LEFT">
+      <StackPane alignment="TOP_LEFT" style="-fx-background-color: #0A0A1A;"
+                 stylesheets="@nightwing.css" BorderPane.alignment="TOP_LEFT">
          <children>
             <ImageView fx:id="iconMenu" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -30,5 +31,4 @@
    <right>
       <VBox prefWidth="146.0" BorderPane.alignment="CENTER" />
    </right>
-
 </BorderPane>

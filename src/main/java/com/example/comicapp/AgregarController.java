@@ -70,7 +70,7 @@ public class AgregarController implements ServiceAware{
         txtNotas.setText(comic.getNotas());
         cmbTipo.setDisable(true);
 
-        // detectar tipo real
+        // detectar tipo
         if (comic instanceof Libro) {
             cmbTipo.setValue("Libro / One-shot");
         }
@@ -98,7 +98,7 @@ public class AgregarController implements ServiceAware{
             String notas = txtNotas.getText();
 
             if (comicEditado == null) {
-                // ====== AGREGAR ======
+                //AGREGAR
                 Comic c;
                 String tipo = cmbTipo.getValue();
 
@@ -126,7 +126,7 @@ public class AgregarController implements ServiceAware{
                 lblMsj.setText("Agregado correctamente");
 
             } else {
-                // ====== EDITAR ======
+                //EDITAR
                 comicEditado.setTitulo(titulo);
                 comicEditado.setEditorial(editorial);
                 comicEditado.setPrecio(precio);

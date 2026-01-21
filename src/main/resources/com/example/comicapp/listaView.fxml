@@ -13,43 +13,24 @@
       xmlns="http://javafx.com/javafx/25"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.comicapp.ListaController">
-
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
-
-    <!-- TÍTULO -->
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;"
-           text="Lista de Comics" />
-
-    <!-- BUSCADOR -->
+    <!--TÍTULO-->
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;" text="Lista de Comics" />
+    <!--BUSCADOR-->
     <HBox spacing="10">
-        <TextField fx:id="txtBuscar" prefWidth="250" promptText="Buscar..."
-                   style="-fx-background-color: #1a1c20;
-                          -fx-text-fill: white;
-                          -fx-prompt-text-fill: #3d5a80;
-                          -fx-background-radius: 8;
-                          -fx-border-color: #1E90FF;
-                          -fx-border-radius: 8;
-                          -fx-border-width: 1;" />
+        <TextField fx:id="txtBuscar" prefWidth="250" promptText="Buscar..." style="-fx-background-color: #1a1c20;
+        -fx-text-fill: white; -fx-prompt-text-fill: #3d5a80; -fx-background-radius: 8; -fx-border-color: #1E90FF;
+        -fx-border-radius: 8; -fx-border-width: 1;" />
     </HBox>
-    <Label fx:id="lblVacio"
-           text="No se encontro" visible="false"
-           style="-fx-text-fill: #6fb0ff; -fx-font-size: 20;"/>
-
-    <!-- CONTENEDOR DE CARDS -->
-    <ScrollPane fitToWidth="true"
-                style="-fx-background: #0A1B33; -fx-background-color: #0A1B33; -fx-padding: 10;"
-                pannable="true"
-                hbarPolicy="NEVER"
-                vbarPolicy="AS_NEEDED">
+    <Label fx:id="lblVacio" text="No se encontro" visible="false" style="-fx-text-fill: #6fb0ff; -fx-font-size: 20;"/>
+    <!--CONTENEDOR DE CARDS-->
+    <ScrollPane fitToWidth="true" style="-fx-background: #0A1B33; -fx-background-color: #0A1B33; -fx-padding: 10;"
+                pannable="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
         <content>
-            <FlowPane fx:id="contenedorCards"
-                      hgap="15" vgap="15"
-                      prefWrapLength="500"
+            <FlowPane fx:id="contenedorCards" hgap="15" vgap="15" prefWrapLength="500"
                       style="-fx-background-color: transparent; -fx-padding: 10" />
         </content>
     </ScrollPane>
-
-
 </VBox>

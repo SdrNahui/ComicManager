@@ -5,18 +5,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" prefHeight="260" prefWidth="180" style="-fx-background-color: #0D2A63; -fx-background-radius: 10;" styleClass="card" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comicapp.CardController">
+<AnchorPane fx:id="root" prefHeight="260" prefWidth="180" style="-fx-background-color: #0D2A63;
+-fx-background-radius: 10;" styleClass="card" xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comicapp.CardController">
 
     <children>
         <VBox spacing="6">
             <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
-
             <AnchorPane prefHeight="140.0" style="-fx-background-color: #222; -fx-background-radius: 8" />
-
-            <Label fx:id="lblTitulo" style="-fx-font-size: 14px; -fx-font-weight: bold;" textFill="white" wrapText="true" />
-
+            <Label fx:id="lblTitulo" style="-fx-font-size: 14px; -fx-font-weight: bold;"
+                   textFill="white" wrapText="true" />
             <Label fx:id="lblInfo" style="-fx-font-size: 12px;" textFill="#B0B0B0" wrapText="true" />
         </VBox>
     </children>

@@ -34,24 +34,6 @@ public class ComicService {
         listaComics.remove(comic);
         guardar();
     }
-    public void editarComic(Comic original, Comic nuevo) {
-        int idx = listaComics.indexOf(original);
-        if (idx != -1) {
-            listaComics.set(idx, nuevo);
-            guardar();
-        }
-    }
-
-
-    public double calcularGastos() {
-        double total = 0;
-        for (Comic c : listaComics) {
-            if (c.getLoTengo()) {
-                total += c.getPrecio();
-            }
-        }
-        return total;
-    }
 
     public List<Comic> buscarInteligente(String texto) {
         List<Comic> resultado = new ArrayList<>();
@@ -61,7 +43,7 @@ public class ComicService {
 
         texto = texto.trim().toLowerCase();
 
-        // ---------- 1. Detectar tipo ----------
+        //Detectar tipo
         TipoDeComic tipoBuscado = null;
         for (TipoDeComic t : TipoDeComic.values()) {
             if (t.coincideConTexto(texto)) {
@@ -69,12 +51,11 @@ public class ComicService {
                 break;
             }
         }
-        // ---------- 2. Detectar rango ----------
+        //Detectar rango
         String[] partes = texto.split(" ");
         StringBuilder textoLimpio = new StringBuilder();
         Integer numDesde = null;
         Integer numHasta = null;
-
         for (String p : partes) {
             try {
                 String[] rango = p.replace("#", "").split("-");
@@ -86,19 +67,15 @@ public class ComicService {
                 textoLimpio.append(p).append(" ");
             }
         }
-
         texto = textoLimpio.toString().trim();
-
-        // ---------- 3. Búsqueda por rango (tomos) ----------
+        //Búsqueda por rango (para tomos)
         if (numDesde != null) {
             for (Comic c : listaComics) {
                 if (c instanceof TomoRecopilatorio t) {
                     boolean rangoOk =
                             t.getDesde() <= numDesde &&
                                     (numHasta == null || t.getHasta() >= numHasta);
-
                     boolean tipoOk = tipoBuscado == null || c.getTipo() == tipoBuscado;
-
                     if (rangoOk && tipoOk) {
                         resultado.add(c);
                     }
@@ -106,32 +83,24 @@ public class ComicService {
             }
             return resultado;
         }
-
-        // ---------- 4. Búsqueda textual ----------
+        //Búsqueda textual
         for (Comic c : listaComics) {
-
             boolean textoOk =
                     texto.isEmpty() ||
                             c.getTitulo().toLowerCase().contains(texto) ||
                             c.getEditorial().toLowerCase().contains(texto);
-
-            // Eventos: buscar también en "incluye"
+            //Eventos: buscar en "incluye" tambien
             if (!textoOk && c instanceof Evento e) {
                 textoOk = e.getIncluye() != null &&
                         e.getIncluye().toLowerCase().contains(texto);
             }
-
             boolean tipoOk = tipoBuscado == null || c.getTipo() == tipoBuscado;
-
             if (textoOk && tipoOk) {
                 resultado.add(c);
             }
         }
         return resultado;
     }
-
-
-
     public List<Comic> getListaComics() {
         return listaComics;
     }
@@ -143,7 +112,6 @@ public class ComicService {
                 .distinct()
                 .count();
     }
-
     public int getNuevosDelMes() {
         YearMonth actual = YearMonth.now();
         return (int) listaComics.stream()
@@ -158,7 +126,6 @@ public class ComicService {
                 .limit(cantidad)
                 .toList();
     }
-
     public void cargar() {
         try (FileReader reader = new FileReader(archivo)) {
             Type tipoLista = new TypeToken<ArrayList<Comic>>() {}.getType();
@@ -177,7 +144,6 @@ public class ComicService {
             e.printStackTrace();
         }
     }
-
     protected void guardar() {
         try (FileWriter writer = new FileWriter(archivo)) {
             gson.toJson(listaComics, writer);

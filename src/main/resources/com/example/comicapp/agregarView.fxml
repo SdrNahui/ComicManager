@@ -11,13 +11,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20" style="-fx-background-color: #0D0F12; -fx-padding: 25;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comicapp.AgregarController">
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: #0D0F12; -fx-padding: 25;"
+      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.comicapp.AgregarController">
 
     <!-- TÍTULO -->
-    <Label style="-fx-font-size: 26px;                   -fx-font-weight: bold;                   -fx-text-fill: #1E90FF;" text="Agregar Comic" />
+    <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;" text="Agregar Comic" />
 
     <!-- TIPO -->
-    <ComboBox fx:id="cmbTipo" promptText="Tipo de comic" style="-fx-background-color: #1a1c20;                      -fx-text-fill: white;                      -fx-background-radius: 8;                      -fx-border-color: #1E90FF;                      -fx-border-radius: 8;                      -fx-border-width: 1;">
+    <ComboBox fx:id="cmbTipo" promptText="Tipo de comic" style="-fx-background-color: #1a1c20; -fx-text-fill: white;
+    -fx-background-radius: 8; -fx-border-color: #1E90FF; -fx-border-radius: 8; -fx-border-width: 1;">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="Libro / One-shot" />
@@ -28,31 +31,41 @@
     </ComboBox>
 
     <!-- CAMPOS COMUNES -->
-    <TextField fx:id="txtTitulo" promptText="Título" style="-fx-background-color: #1a1c20;                       -fx-text-fill: white;                       -fx-prompt-text-fill: #3d5a80;                       -fx-background-radius: 8;                       -fx-border-color: #1E90FF;                       -fx-border-radius: 8;                       -fx-border-width: 1;" />
+    <TextField fx:id="txtTitulo" promptText="Título" style="-fx-background-color: #1a1c20; -fx-text-fill: white;
+    -fx-prompt-text-fill: #3d5a80; -fx-background-radius: 8; -fx-border-color: #1E90FF; -fx-border-radius: 8;
+    -fx-border-width: 1;" />
 
-    <TextField fx:id="txtEditorial" promptText="Editorial" style="-fx-background-color: #1a1c20;                       -fx-text-fill: white;                       -fx-prompt-text-fill: #3d5a80;                       -fx-background-radius: 8;                       -fx-border-color: #1E90FF;                       -fx-border-radius: 8;                       -fx-border-width: 1;" />
+    <TextField fx:id="txtEditorial" promptText="Editorial" style="-fx-background-color: #1a1c20; -fx-text-fill: white;
+    -fx-prompt-text-fill: #3d5a80; -fx-background-radius: 8; -fx-border-color: #1E90FF; -fx-border-radius: 8;
+    -fx-border-width: 1;" />
 
-    <TextField fx:id="txtPrecio" promptText="Precio" style="-fx-background-color: #1a1c20;                       -fx-text-fill: white;                       -fx-prompt-text-fill: #3d5a80;                       -fx-background-radius: 8;                       -fx-border-color: #1E90FF;                       -fx-border-radius: 8;                       -fx-border-width: 1;" />
+    <TextField fx:id="txtPrecio" promptText="Precio" style="-fx-background-color: #1a1c20; -fx-text-fill: white;
+    -fx-prompt-text-fill: #3d5a80; -fx-background-radius: 8; -fx-border-color: #1E90FF; -fx-border-radius: 8;
+    -fx-border-width: 1;" />
 
     <!-- TOMO RECOPILATORIO -->
     <HBox fx:id="boxTomo" spacing="10">
-        <TextField fx:id="txtDesde" promptText="Desde #" style="-fx-background-color: #1a1c20;                       -fx-text-fill: white;                       -fx-background-radius: 8;                       -fx-border-color: #1E90FF;" />
-
-        <TextField fx:id="txtHasta" promptText="Hasta #" style="-fx-background-color: #1a1c20;                       -fx-text-fill: white;                       -fx-background-radius: 8;                       -fx-border-color: #1E90FF;" />
+        <TextField fx:id="txtDesde" promptText="Desde #" style="-fx-background-color: #1a1c20; -fx-text-fill: white;
+        -fx-background-radius: 8; -fx-border-color: #1E90FF;" />
+        <TextField fx:id="txtHasta" promptText="Hasta #" style="-fx-background-color: #1a1c20; -fx-text-fill: white;
+        -fx-background-radius: 8; -fx-border-color: #1E90FF;" />
     </HBox>
 
     <!-- EVENTO -->
-    <TextArea fx:id="txtIncluye" prefWidth="260" promptText="Incluye (series, números, anuales, etc)" style="-fx-background-color: #1a1c20;                  -fx-text-fill: white;                  -fx-prompt-text-fill: #3d5a80;                  -fx-background-radius: 8;                  -fx-border-color: #1E90FF;" stylesheets="@nightwing.css" />
+    <TextArea fx:id="txtIncluye" prefWidth="260" promptText="Incluye (series, números, anuales, etc)"
+              style="-fx-background-color: #1a1c20; -fx-text-fill: white; -fx-prompt-text-fill: #3d5a80;
+              -fx-background-radius: 8; -fx-border-color: #1E90FF;" stylesheets="@nightwing.css" />
 
     <!-- NOTAS -->
-    <TextArea fx:id="txtNotas" prefWidth="260" promptText="Notas" style="-fx-background-color: #1a1c20;                      -fx-text-fill: white;                      -fx-prompt-text-fill: #3d5a80;                      -fx-background-radius: 8;                      -fx-border-color: #1E90FF;" stylesheets="@nightwing.css" />
+    <TextArea fx:id="txtNotas" prefWidth="260" promptText="Notas" style="-fx-background-color: #1a1c20;
+    -fx-text-fill: white; -fx-prompt-text-fill: #3d5a80; -fx-background-radius: 8; -fx-border-color: #1E90FF;"
+              stylesheets="@nightwing.css" />
 
-    <CheckBox fx:id="loTengo" style="-fx-text-fill: white;                      -fx-font-size: 14px;" text="¿Lo tengo?" />
-
+    <CheckBox fx:id="loTengo" style="-fx-text-fill: white; -fx-font-size: 14px;" text="¿Lo tengo?" />
     <!-- BOTÓN -->
-    <Button onAction="#guardar" style="-fx-background-color: #1E90FF;                    -fx-text-fill: white;                    -fx-background-radius: 8;                    -fx-font-weight: bold;                    -fx-padding: 8 20;" text="Guardar" />
-
+    <Button onAction="#guardar" style="-fx-background-color: #1E90FF; -fx-text-fill: white; -fx-background-radius: 8;
+    -fx-font-weight: bold; -fx-padding: 8 20;" text="Guardar" />
     <!-- MENSAJE -->
-    <Label fx:id="lblMsj" style="-fx-text-fill: #1E90FF;                   -fx-font-size: 14px;" text="" />
+    <Label fx:id="lblMsj" style="-fx-text-fill: #1E90FF; -fx-font-size: 14px;" text="" />
 
 </VBox>
