@@ -74,6 +74,35 @@ Patrón **MVC (Model–View–Controller)** con separación de responsabilidades
 
 ---
 
+## Cómo ejecutar el proyecto
+
+Este proyecto está pensado para ejecutarse en un entorno de desarrollo (IDE).
+
+### Requisitos
+- Java JDK 17 o superior (probado con JDK 25.0.1)
+- Maven
+- IDE compatible con JavaFX (IntelliJ IDEA recomendado)
+
+### Dependencias
+- JavaFX 21.0.6 (Maven)
+- Gson 2.11.0 (Maven)
+
+### Pasos
+1. Clonar el repositorio
+   ```bash
+   git clone https://github.com/SdrNahui/ComicManager.git
+   ```
+
+2. Abrir el proyecto en el IDE
+
+3. Configurar el SDK si es necesario (Language level: SDK default)
+
+4. Ejecutar la clase `ComicsApp`
+
+Los datos se cargan automáticamente desde archivos JSON locales.
+
+---
+
 ## Estado del proyecto
 
 - Funcional
