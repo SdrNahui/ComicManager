@@ -53,4 +53,48 @@ Patrón **MVC (Model–View–Controller)** con separación de responsabilidades
 - Manejo de errores y feedback al usuario (IREP)
 - Uso de `ArrayList` como colección base
 - Separación de capas
-- Aprendizaje iterativo
+- Aprendizaje iterativo (prueba y error)
+- Primer acercamiento a UX/UI
+
+---
+
+## Conceptos aprendidos
+- Diseño de lógica de negocio
+- Persistencia de datos
+- Delegación de responsabilidades
+- Importancia del feedback visual
+- Impacto del UX/UI en aplicaciones de escritorio
+
+---
+
+## Cómo ejecutar el proyecto
+Este proyecto está pensado para ejecutarse en un entorno de desarrollo (IDE).
+
+### Requisitos
+- Java JDK 25.0.1
+- Maven
+- IDE compatible con JavaFX (IntelliJ IDEA recomendado)
+
+### Dependencias
+- JavaFX 25 (Maven)
+- Gson 2.11.0 (Maven)
+
+### Pasos
+1. Clonar el repositorio
+```bash
+   git clone https://github.com/SdrNahui/ComicManager.git
+```
+2. Abrir el proyecto en el IDE
+3. Configurar el SDK si es necesario (Language level: SDK default)
+4. Ejecutar la clase `ComicsApp`
+
+Los datos se cargan automáticamente desde archivos JSON locales.
+
+---
+
+## Estado del proyecto
+- Funcional
+- Persistente
+- Estable
+- Versión: **v1.1**
+- Base conceptual para proyectos posteriores
